@@ -1,0 +1,1444 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND_KW
+    BOOLEAN_KW
+    COLON
+    COMMENT
+    FALSE_KW
+    INTEGER_KW
+    OR_KW
+    REAL_KW
+    TRUE_KW
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM_KW identifier SEMICOLON block
+Rule 2     identifier -> IDENTIFIER
+Rule 3     block -> BEGIN_KW statement_list END_KW
+Rule 4     statement_list -> statement SEMICOLON statement_list
+Rule 5     statement_list -> empty
+Rule 6     statement -> assignment_statement
+Rule 7     statement -> if_statement
+Rule 8     statement -> while_statement
+Rule 9     statement -> for_statement
+Rule 10    statement -> other_statements
+Rule 11    assignment_statement -> identifier ASSIGN_OP expression
+Rule 12    if_statement -> IF_KW condition THEN_KW statement_list else_part
+Rule 13    else_part -> ELSE_KW statement_list
+Rule 14    else_part -> empty
+Rule 15    condition -> expression LT_OP expression
+Rule 16    condition -> expression LE_OP expression
+Rule 17    condition -> expression EQ_OP expression
+Rule 18    condition -> expression NE_OP expression
+Rule 19    condition -> expression GE_OP expression
+Rule 20    condition -> expression GT_OP expression
+Rule 21    expression -> term
+Rule 22    expression -> expression ADD_OP term
+Rule 23    expression -> expression SUB_OP term
+Rule 24    term -> factor
+Rule 25    term -> term MUL_OP factor
+Rule 26    term -> term DIV_OP factor
+Rule 27    factor -> NUMBER
+Rule 28    factor -> identifier
+Rule 29    factor -> LEFT_PA expression RIGHT_PA
+Rule 30    while_statement -> WHILE_KW condition DO_KW statement_list
+Rule 31    for_statement -> FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+Rule 32    other_statements -> RETURN_KW expression
+Rule 33    other_statements -> function_call
+Rule 34    function_call -> FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+Rule 35    argument_list -> expression COMMA argument_list
+Rule 36    argument_list -> expression
+Rule 37    argument_list -> empty
+Rule 38    empty -> <empty>
+
+Terminals, with rules where they appear
+
+ADD_OP               : 22
+AND_KW               : 
+ASSIGN_OP            : 11 31
+BEGIN_KW             : 3
+BOOLEAN_KW           : 
+COLON                : 
+COMMA                : 35
+COMMENT              : 
+DIV_OP               : 26
+DO_KW                : 30 31
+ELSE_KW              : 13
+END_KW               : 3
+EQ_OP                : 17
+FALSE_KW             : 
+FOR_KW               : 31
+FUNCTION_KW          : 34
+GE_OP                : 19
+GT_OP                : 20
+IDENTIFIER           : 2
+IF_KW                : 12
+INTEGER_KW           : 
+LEFT_PA              : 29 34
+LE_OP                : 16
+LT_OP                : 15
+MUL_OP               : 25
+NE_OP                : 18
+NUMBER               : 27
+OR_KW                : 
+PROGRAM_KW           : 1
+REAL_KW              : 
+RETURN_KW            : 32
+RIGHT_PA             : 29 34
+SEMICOLON            : 1 4
+SUB_OP               : 23
+THEN_KW              : 12
+TO_KW                : 31
+TRUE_KW              : 
+WHILE_KW             : 30
+error                : 
+
+Nonterminals, with rules where they appear
+
+argument_list        : 34 35
+assignment_statement : 6
+block                : 1
+condition            : 12 30
+else_part            : 12
+empty                : 5 14 37
+expression           : 11 15 15 16 16 17 17 18 18 19 19 20 20 22 23 29 31 31 32 35 36
+factor               : 24 25 26
+for_statement        : 9
+function_call        : 33
+identifier           : 1 11 28 31 34
+if_statement         : 7
+other_statements     : 10
+program              : 0
+statement            : 4
+statement_list       : 3 4 12 13 30 31
+term                 : 21 22 23 25 26
+while_statement      : 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM_KW identifier SEMICOLON block
+
+    PROGRAM_KW      shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM_KW . identifier SEMICOLON block
+    (2) identifier -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 3
+
+state 3
+
+    (1) program -> PROGRAM_KW identifier . SEMICOLON block
+
+    SEMICOLON       shift and go to state 5
+
+
+state 4
+
+    (2) identifier -> IDENTIFIER .
+
+    SEMICOLON       reduce using rule 2 (identifier -> IDENTIFIER .)
+    ASSIGN_OP       reduce using rule 2 (identifier -> IDENTIFIER .)
+    MUL_OP          reduce using rule 2 (identifier -> IDENTIFIER .)
+    DIV_OP          reduce using rule 2 (identifier -> IDENTIFIER .)
+    LT_OP           reduce using rule 2 (identifier -> IDENTIFIER .)
+    LE_OP           reduce using rule 2 (identifier -> IDENTIFIER .)
+    EQ_OP           reduce using rule 2 (identifier -> IDENTIFIER .)
+    NE_OP           reduce using rule 2 (identifier -> IDENTIFIER .)
+    GE_OP           reduce using rule 2 (identifier -> IDENTIFIER .)
+    GT_OP           reduce using rule 2 (identifier -> IDENTIFIER .)
+    ADD_OP          reduce using rule 2 (identifier -> IDENTIFIER .)
+    SUB_OP          reduce using rule 2 (identifier -> IDENTIFIER .)
+    LEFT_PA         reduce using rule 2 (identifier -> IDENTIFIER .)
+    RIGHT_PA        reduce using rule 2 (identifier -> IDENTIFIER .)
+    THEN_KW         reduce using rule 2 (identifier -> IDENTIFIER .)
+    DO_KW           reduce using rule 2 (identifier -> IDENTIFIER .)
+    TO_KW           reduce using rule 2 (identifier -> IDENTIFIER .)
+    COMMA           reduce using rule 2 (identifier -> IDENTIFIER .)
+
+
+state 5
+
+    (1) program -> PROGRAM_KW identifier SEMICOLON . block
+    (3) block -> . BEGIN_KW statement_list END_KW
+
+    BEGIN_KW        shift and go to state 7
+
+    block                          shift and go to state 6
+
+state 6
+
+    (1) program -> PROGRAM_KW identifier SEMICOLON block .
+
+    $end            reduce using rule 1 (program -> PROGRAM_KW identifier SEMICOLON block .)
+
+
+state 7
+
+    (3) block -> BEGIN_KW . statement_list END_KW
+    (4) statement_list -> . statement SEMICOLON statement_list
+    (5) statement_list -> . empty
+    (6) statement -> . assignment_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) statement -> . other_statements
+    (38) empty -> .
+    (11) assignment_statement -> . identifier ASSIGN_OP expression
+    (12) if_statement -> . IF_KW condition THEN_KW statement_list else_part
+    (30) while_statement -> . WHILE_KW condition DO_KW statement_list
+    (31) for_statement -> . FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (32) other_statements -> . RETURN_KW expression
+    (33) other_statements -> . function_call
+    (2) identifier -> . IDENTIFIER
+    (34) function_call -> . FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+
+    END_KW          reduce using rule 38 (empty -> .)
+    IF_KW           shift and go to state 17
+    WHILE_KW        shift and go to state 18
+    FOR_KW          shift and go to state 19
+    RETURN_KW       shift and go to state 20
+    IDENTIFIER      shift and go to state 4
+    FUNCTION_KW     shift and go to state 22
+
+    statement_list                 shift and go to state 8
+    statement                      shift and go to state 9
+    empty                          shift and go to state 10
+    assignment_statement           shift and go to state 11
+    if_statement                   shift and go to state 12
+    while_statement                shift and go to state 13
+    for_statement                  shift and go to state 14
+    other_statements               shift and go to state 15
+    identifier                     shift and go to state 16
+    function_call                  shift and go to state 21
+
+state 8
+
+    (3) block -> BEGIN_KW statement_list . END_KW
+
+    END_KW          shift and go to state 23
+
+
+state 9
+
+    (4) statement_list -> statement . SEMICOLON statement_list
+
+    SEMICOLON       shift and go to state 24
+
+
+state 10
+
+    (5) statement_list -> empty .
+
+    END_KW          reduce using rule 5 (statement_list -> empty .)
+    ELSE_KW         reduce using rule 5 (statement_list -> empty .)
+    SEMICOLON       reduce using rule 5 (statement_list -> empty .)
+
+
+state 11
+
+    (6) statement -> assignment_statement .
+
+    SEMICOLON       reduce using rule 6 (statement -> assignment_statement .)
+
+
+state 12
+
+    (7) statement -> if_statement .
+
+    SEMICOLON       reduce using rule 7 (statement -> if_statement .)
+
+
+state 13
+
+    (8) statement -> while_statement .
+
+    SEMICOLON       reduce using rule 8 (statement -> while_statement .)
+
+
+state 14
+
+    (9) statement -> for_statement .
+
+    SEMICOLON       reduce using rule 9 (statement -> for_statement .)
+
+
+state 15
+
+    (10) statement -> other_statements .
+
+    SEMICOLON       reduce using rule 10 (statement -> other_statements .)
+
+
+state 16
+
+    (11) assignment_statement -> identifier . ASSIGN_OP expression
+
+    ASSIGN_OP       shift and go to state 25
+
+
+state 17
+
+    (12) if_statement -> IF_KW . condition THEN_KW statement_list else_part
+    (15) condition -> . expression LT_OP expression
+    (16) condition -> . expression LE_OP expression
+    (17) condition -> . expression EQ_OP expression
+    (18) condition -> . expression NE_OP expression
+    (19) condition -> . expression GE_OP expression
+    (20) condition -> . expression GT_OP expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    condition                      shift and go to state 26
+    expression                     shift and go to state 27
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 18
+
+    (30) while_statement -> WHILE_KW . condition DO_KW statement_list
+    (15) condition -> . expression LT_OP expression
+    (16) condition -> . expression LE_OP expression
+    (17) condition -> . expression EQ_OP expression
+    (18) condition -> . expression NE_OP expression
+    (19) condition -> . expression GE_OP expression
+    (20) condition -> . expression GT_OP expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    condition                      shift and go to state 33
+    expression                     shift and go to state 27
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 19
+
+    (31) for_statement -> FOR_KW . identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (2) identifier -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 34
+
+state 20
+
+    (32) other_statements -> RETURN_KW . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 35
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 21
+
+    (33) other_statements -> function_call .
+
+    SEMICOLON       reduce using rule 33 (other_statements -> function_call .)
+
+
+state 22
+
+    (34) function_call -> FUNCTION_KW . identifier LEFT_PA argument_list RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 36
+
+state 23
+
+    (3) block -> BEGIN_KW statement_list END_KW .
+
+    $end            reduce using rule 3 (block -> BEGIN_KW statement_list END_KW .)
+
+
+state 24
+
+    (4) statement_list -> statement SEMICOLON . statement_list
+    (4) statement_list -> . statement SEMICOLON statement_list
+    (5) statement_list -> . empty
+    (6) statement -> . assignment_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) statement -> . other_statements
+    (38) empty -> .
+    (11) assignment_statement -> . identifier ASSIGN_OP expression
+    (12) if_statement -> . IF_KW condition THEN_KW statement_list else_part
+    (30) while_statement -> . WHILE_KW condition DO_KW statement_list
+    (31) for_statement -> . FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (32) other_statements -> . RETURN_KW expression
+    (33) other_statements -> . function_call
+    (2) identifier -> . IDENTIFIER
+    (34) function_call -> . FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+
+    END_KW          reduce using rule 38 (empty -> .)
+    ELSE_KW         reduce using rule 38 (empty -> .)
+    SEMICOLON       reduce using rule 38 (empty -> .)
+    IF_KW           shift and go to state 17
+    WHILE_KW        shift and go to state 18
+    FOR_KW          shift and go to state 19
+    RETURN_KW       shift and go to state 20
+    IDENTIFIER      shift and go to state 4
+    FUNCTION_KW     shift and go to state 22
+
+    statement                      shift and go to state 9
+    statement_list                 shift and go to state 37
+    empty                          shift and go to state 10
+    assignment_statement           shift and go to state 11
+    if_statement                   shift and go to state 12
+    while_statement                shift and go to state 13
+    for_statement                  shift and go to state 14
+    other_statements               shift and go to state 15
+    identifier                     shift and go to state 16
+    function_call                  shift and go to state 21
+
+state 25
+
+    (11) assignment_statement -> identifier ASSIGN_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 31
+    expression                     shift and go to state 38
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+
+state 26
+
+    (12) if_statement -> IF_KW condition . THEN_KW statement_list else_part
+
+    THEN_KW         shift and go to state 39
+
+
+state 27
+
+    (15) condition -> expression . LT_OP expression
+    (16) condition -> expression . LE_OP expression
+    (17) condition -> expression . EQ_OP expression
+    (18) condition -> expression . NE_OP expression
+    (19) condition -> expression . GE_OP expression
+    (20) condition -> expression . GT_OP expression
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    LT_OP           shift and go to state 40
+    LE_OP           shift and go to state 41
+    EQ_OP           shift and go to state 42
+    NE_OP           shift and go to state 43
+    GE_OP           shift and go to state 44
+    GT_OP           shift and go to state 45
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 28
+
+    (21) expression -> term .
+    (25) term -> term . MUL_OP factor
+    (26) term -> term . DIV_OP factor
+
+    LT_OP           reduce using rule 21 (expression -> term .)
+    LE_OP           reduce using rule 21 (expression -> term .)
+    EQ_OP           reduce using rule 21 (expression -> term .)
+    NE_OP           reduce using rule 21 (expression -> term .)
+    GE_OP           reduce using rule 21 (expression -> term .)
+    GT_OP           reduce using rule 21 (expression -> term .)
+    ADD_OP          reduce using rule 21 (expression -> term .)
+    SUB_OP          reduce using rule 21 (expression -> term .)
+    SEMICOLON       reduce using rule 21 (expression -> term .)
+    RIGHT_PA        reduce using rule 21 (expression -> term .)
+    THEN_KW         reduce using rule 21 (expression -> term .)
+    DO_KW           reduce using rule 21 (expression -> term .)
+    TO_KW           reduce using rule 21 (expression -> term .)
+    COMMA           reduce using rule 21 (expression -> term .)
+    MUL_OP          shift and go to state 48
+    DIV_OP          shift and go to state 49
+
+
+state 29
+
+    (24) term -> factor .
+
+    MUL_OP          reduce using rule 24 (term -> factor .)
+    DIV_OP          reduce using rule 24 (term -> factor .)
+    LT_OP           reduce using rule 24 (term -> factor .)
+    LE_OP           reduce using rule 24 (term -> factor .)
+    EQ_OP           reduce using rule 24 (term -> factor .)
+    NE_OP           reduce using rule 24 (term -> factor .)
+    GE_OP           reduce using rule 24 (term -> factor .)
+    GT_OP           reduce using rule 24 (term -> factor .)
+    ADD_OP          reduce using rule 24 (term -> factor .)
+    SUB_OP          reduce using rule 24 (term -> factor .)
+    SEMICOLON       reduce using rule 24 (term -> factor .)
+    RIGHT_PA        reduce using rule 24 (term -> factor .)
+    THEN_KW         reduce using rule 24 (term -> factor .)
+    DO_KW           reduce using rule 24 (term -> factor .)
+    TO_KW           reduce using rule 24 (term -> factor .)
+    COMMA           reduce using rule 24 (term -> factor .)
+
+
+state 30
+
+    (27) factor -> NUMBER .
+
+    MUL_OP          reduce using rule 27 (factor -> NUMBER .)
+    DIV_OP          reduce using rule 27 (factor -> NUMBER .)
+    LT_OP           reduce using rule 27 (factor -> NUMBER .)
+    LE_OP           reduce using rule 27 (factor -> NUMBER .)
+    EQ_OP           reduce using rule 27 (factor -> NUMBER .)
+    NE_OP           reduce using rule 27 (factor -> NUMBER .)
+    GE_OP           reduce using rule 27 (factor -> NUMBER .)
+    GT_OP           reduce using rule 27 (factor -> NUMBER .)
+    ADD_OP          reduce using rule 27 (factor -> NUMBER .)
+    SUB_OP          reduce using rule 27 (factor -> NUMBER .)
+    SEMICOLON       reduce using rule 27 (factor -> NUMBER .)
+    RIGHT_PA        reduce using rule 27 (factor -> NUMBER .)
+    THEN_KW         reduce using rule 27 (factor -> NUMBER .)
+    DO_KW           reduce using rule 27 (factor -> NUMBER .)
+    TO_KW           reduce using rule 27 (factor -> NUMBER .)
+    COMMA           reduce using rule 27 (factor -> NUMBER .)
+
+
+state 31
+
+    (28) factor -> identifier .
+
+    MUL_OP          reduce using rule 28 (factor -> identifier .)
+    DIV_OP          reduce using rule 28 (factor -> identifier .)
+    LT_OP           reduce using rule 28 (factor -> identifier .)
+    LE_OP           reduce using rule 28 (factor -> identifier .)
+    EQ_OP           reduce using rule 28 (factor -> identifier .)
+    NE_OP           reduce using rule 28 (factor -> identifier .)
+    GE_OP           reduce using rule 28 (factor -> identifier .)
+    GT_OP           reduce using rule 28 (factor -> identifier .)
+    ADD_OP          reduce using rule 28 (factor -> identifier .)
+    SUB_OP          reduce using rule 28 (factor -> identifier .)
+    SEMICOLON       reduce using rule 28 (factor -> identifier .)
+    RIGHT_PA        reduce using rule 28 (factor -> identifier .)
+    THEN_KW         reduce using rule 28 (factor -> identifier .)
+    DO_KW           reduce using rule 28 (factor -> identifier .)
+    TO_KW           reduce using rule 28 (factor -> identifier .)
+    COMMA           reduce using rule 28 (factor -> identifier .)
+
+
+state 32
+
+    (29) factor -> LEFT_PA . expression RIGHT_PA
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 50
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 33
+
+    (30) while_statement -> WHILE_KW condition . DO_KW statement_list
+
+    DO_KW           shift and go to state 51
+
+
+state 34
+
+    (31) for_statement -> FOR_KW identifier . ASSIGN_OP expression TO_KW expression DO_KW statement_list
+
+    ASSIGN_OP       shift and go to state 52
+
+
+state 35
+
+    (32) other_statements -> RETURN_KW expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    SEMICOLON       reduce using rule 32 (other_statements -> RETURN_KW expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 36
+
+    (34) function_call -> FUNCTION_KW identifier . LEFT_PA argument_list RIGHT_PA
+
+    LEFT_PA         shift and go to state 53
+
+
+state 37
+
+    (4) statement_list -> statement SEMICOLON statement_list .
+
+    END_KW          reduce using rule 4 (statement_list -> statement SEMICOLON statement_list .)
+    ELSE_KW         reduce using rule 4 (statement_list -> statement SEMICOLON statement_list .)
+    SEMICOLON       reduce using rule 4 (statement_list -> statement SEMICOLON statement_list .)
+
+
+state 38
+
+    (11) assignment_statement -> identifier ASSIGN_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    SEMICOLON       reduce using rule 11 (assignment_statement -> identifier ASSIGN_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 39
+
+    (12) if_statement -> IF_KW condition THEN_KW . statement_list else_part
+    (4) statement_list -> . statement SEMICOLON statement_list
+    (5) statement_list -> . empty
+    (6) statement -> . assignment_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) statement -> . other_statements
+    (38) empty -> .
+    (11) assignment_statement -> . identifier ASSIGN_OP expression
+    (12) if_statement -> . IF_KW condition THEN_KW statement_list else_part
+    (30) while_statement -> . WHILE_KW condition DO_KW statement_list
+    (31) for_statement -> . FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (32) other_statements -> . RETURN_KW expression
+    (33) other_statements -> . function_call
+    (2) identifier -> . IDENTIFIER
+    (34) function_call -> . FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+
+    ELSE_KW         reduce using rule 38 (empty -> .)
+    SEMICOLON       reduce using rule 38 (empty -> .)
+    IF_KW           shift and go to state 17
+    WHILE_KW        shift and go to state 18
+    FOR_KW          shift and go to state 19
+    RETURN_KW       shift and go to state 20
+    IDENTIFIER      shift and go to state 4
+    FUNCTION_KW     shift and go to state 22
+
+    statement_list                 shift and go to state 54
+    statement                      shift and go to state 9
+    empty                          shift and go to state 10
+    assignment_statement           shift and go to state 11
+    if_statement                   shift and go to state 12
+    while_statement                shift and go to state 13
+    for_statement                  shift and go to state 14
+    other_statements               shift and go to state 15
+    identifier                     shift and go to state 16
+    function_call                  shift and go to state 21
+
+state 40
+
+    (15) condition -> expression LT_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 55
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 41
+
+    (16) condition -> expression LE_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 56
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 42
+
+    (17) condition -> expression EQ_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 57
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 43
+
+    (18) condition -> expression NE_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 58
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 44
+
+    (19) condition -> expression GE_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 59
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 45
+
+    (20) condition -> expression GT_OP . expression
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 60
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 46
+
+    (22) expression -> expression ADD_OP . term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    term                           shift and go to state 61
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 47
+
+    (23) expression -> expression SUB_OP . term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    term                           shift and go to state 62
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 48
+
+    (25) term -> term MUL_OP . factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    factor                         shift and go to state 63
+    identifier                     shift and go to state 31
+
+state 49
+
+    (26) term -> term DIV_OP . factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    factor                         shift and go to state 64
+    identifier                     shift and go to state 31
+
+state 50
+
+    (29) factor -> LEFT_PA expression . RIGHT_PA
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    RIGHT_PA        shift and go to state 65
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 51
+
+    (30) while_statement -> WHILE_KW condition DO_KW . statement_list
+    (4) statement_list -> . statement SEMICOLON statement_list
+    (5) statement_list -> . empty
+    (6) statement -> . assignment_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) statement -> . other_statements
+    (38) empty -> .
+    (11) assignment_statement -> . identifier ASSIGN_OP expression
+    (12) if_statement -> . IF_KW condition THEN_KW statement_list else_part
+    (30) while_statement -> . WHILE_KW condition DO_KW statement_list
+    (31) for_statement -> . FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (32) other_statements -> . RETURN_KW expression
+    (33) other_statements -> . function_call
+    (2) identifier -> . IDENTIFIER
+    (34) function_call -> . FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+
+    SEMICOLON       reduce using rule 38 (empty -> .)
+    IF_KW           shift and go to state 17
+    WHILE_KW        shift and go to state 18
+    FOR_KW          shift and go to state 19
+    RETURN_KW       shift and go to state 20
+    IDENTIFIER      shift and go to state 4
+    FUNCTION_KW     shift and go to state 22
+
+    statement_list                 shift and go to state 66
+    statement                      shift and go to state 9
+    empty                          shift and go to state 10
+    assignment_statement           shift and go to state 11
+    if_statement                   shift and go to state 12
+    while_statement                shift and go to state 13
+    for_statement                  shift and go to state 14
+    other_statements               shift and go to state 15
+    identifier                     shift and go to state 16
+    function_call                  shift and go to state 21
+
+state 52
+
+    (31) for_statement -> FOR_KW identifier ASSIGN_OP . expression TO_KW expression DO_KW statement_list
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 31
+    expression                     shift and go to state 67
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+
+state 53
+
+    (34) function_call -> FUNCTION_KW identifier LEFT_PA . argument_list RIGHT_PA
+    (35) argument_list -> . expression COMMA argument_list
+    (36) argument_list -> . expression
+    (37) argument_list -> . empty
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (38) empty -> .
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    RIGHT_PA        reduce using rule 38 (empty -> .)
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 31
+    argument_list                  shift and go to state 68
+    expression                     shift and go to state 69
+    empty                          shift and go to state 70
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+
+state 54
+
+    (12) if_statement -> IF_KW condition THEN_KW statement_list . else_part
+    (13) else_part -> . ELSE_KW statement_list
+    (14) else_part -> . empty
+    (38) empty -> .
+
+    ELSE_KW         shift and go to state 72
+    SEMICOLON       reduce using rule 38 (empty -> .)
+
+    else_part                      shift and go to state 71
+    empty                          shift and go to state 73
+
+state 55
+
+    (15) condition -> expression LT_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    THEN_KW         reduce using rule 15 (condition -> expression LT_OP expression .)
+    DO_KW           reduce using rule 15 (condition -> expression LT_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 56
+
+    (16) condition -> expression LE_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    THEN_KW         reduce using rule 16 (condition -> expression LE_OP expression .)
+    DO_KW           reduce using rule 16 (condition -> expression LE_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 57
+
+    (17) condition -> expression EQ_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    THEN_KW         reduce using rule 17 (condition -> expression EQ_OP expression .)
+    DO_KW           reduce using rule 17 (condition -> expression EQ_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 58
+
+    (18) condition -> expression NE_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    THEN_KW         reduce using rule 18 (condition -> expression NE_OP expression .)
+    DO_KW           reduce using rule 18 (condition -> expression NE_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 59
+
+    (19) condition -> expression GE_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    THEN_KW         reduce using rule 19 (condition -> expression GE_OP expression .)
+    DO_KW           reduce using rule 19 (condition -> expression GE_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 60
+
+    (20) condition -> expression GT_OP expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    THEN_KW         reduce using rule 20 (condition -> expression GT_OP expression .)
+    DO_KW           reduce using rule 20 (condition -> expression GT_OP expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 61
+
+    (22) expression -> expression ADD_OP term .
+    (25) term -> term . MUL_OP factor
+    (26) term -> term . DIV_OP factor
+
+    LT_OP           reduce using rule 22 (expression -> expression ADD_OP term .)
+    LE_OP           reduce using rule 22 (expression -> expression ADD_OP term .)
+    EQ_OP           reduce using rule 22 (expression -> expression ADD_OP term .)
+    NE_OP           reduce using rule 22 (expression -> expression ADD_OP term .)
+    GE_OP           reduce using rule 22 (expression -> expression ADD_OP term .)
+    GT_OP           reduce using rule 22 (expression -> expression ADD_OP term .)
+    ADD_OP          reduce using rule 22 (expression -> expression ADD_OP term .)
+    SUB_OP          reduce using rule 22 (expression -> expression ADD_OP term .)
+    SEMICOLON       reduce using rule 22 (expression -> expression ADD_OP term .)
+    RIGHT_PA        reduce using rule 22 (expression -> expression ADD_OP term .)
+    THEN_KW         reduce using rule 22 (expression -> expression ADD_OP term .)
+    DO_KW           reduce using rule 22 (expression -> expression ADD_OP term .)
+    TO_KW           reduce using rule 22 (expression -> expression ADD_OP term .)
+    COMMA           reduce using rule 22 (expression -> expression ADD_OP term .)
+    MUL_OP          shift and go to state 48
+    DIV_OP          shift and go to state 49
+
+
+state 62
+
+    (23) expression -> expression SUB_OP term .
+    (25) term -> term . MUL_OP factor
+    (26) term -> term . DIV_OP factor
+
+    LT_OP           reduce using rule 23 (expression -> expression SUB_OP term .)
+    LE_OP           reduce using rule 23 (expression -> expression SUB_OP term .)
+    EQ_OP           reduce using rule 23 (expression -> expression SUB_OP term .)
+    NE_OP           reduce using rule 23 (expression -> expression SUB_OP term .)
+    GE_OP           reduce using rule 23 (expression -> expression SUB_OP term .)
+    GT_OP           reduce using rule 23 (expression -> expression SUB_OP term .)
+    ADD_OP          reduce using rule 23 (expression -> expression SUB_OP term .)
+    SUB_OP          reduce using rule 23 (expression -> expression SUB_OP term .)
+    SEMICOLON       reduce using rule 23 (expression -> expression SUB_OP term .)
+    RIGHT_PA        reduce using rule 23 (expression -> expression SUB_OP term .)
+    THEN_KW         reduce using rule 23 (expression -> expression SUB_OP term .)
+    DO_KW           reduce using rule 23 (expression -> expression SUB_OP term .)
+    TO_KW           reduce using rule 23 (expression -> expression SUB_OP term .)
+    COMMA           reduce using rule 23 (expression -> expression SUB_OP term .)
+    MUL_OP          shift and go to state 48
+    DIV_OP          shift and go to state 49
+
+
+state 63
+
+    (25) term -> term MUL_OP factor .
+
+    MUL_OP          reduce using rule 25 (term -> term MUL_OP factor .)
+    DIV_OP          reduce using rule 25 (term -> term MUL_OP factor .)
+    LT_OP           reduce using rule 25 (term -> term MUL_OP factor .)
+    LE_OP           reduce using rule 25 (term -> term MUL_OP factor .)
+    EQ_OP           reduce using rule 25 (term -> term MUL_OP factor .)
+    NE_OP           reduce using rule 25 (term -> term MUL_OP factor .)
+    GE_OP           reduce using rule 25 (term -> term MUL_OP factor .)
+    GT_OP           reduce using rule 25 (term -> term MUL_OP factor .)
+    ADD_OP          reduce using rule 25 (term -> term MUL_OP factor .)
+    SUB_OP          reduce using rule 25 (term -> term MUL_OP factor .)
+    SEMICOLON       reduce using rule 25 (term -> term MUL_OP factor .)
+    RIGHT_PA        reduce using rule 25 (term -> term MUL_OP factor .)
+    THEN_KW         reduce using rule 25 (term -> term MUL_OP factor .)
+    DO_KW           reduce using rule 25 (term -> term MUL_OP factor .)
+    TO_KW           reduce using rule 25 (term -> term MUL_OP factor .)
+    COMMA           reduce using rule 25 (term -> term MUL_OP factor .)
+
+
+state 64
+
+    (26) term -> term DIV_OP factor .
+
+    MUL_OP          reduce using rule 26 (term -> term DIV_OP factor .)
+    DIV_OP          reduce using rule 26 (term -> term DIV_OP factor .)
+    LT_OP           reduce using rule 26 (term -> term DIV_OP factor .)
+    LE_OP           reduce using rule 26 (term -> term DIV_OP factor .)
+    EQ_OP           reduce using rule 26 (term -> term DIV_OP factor .)
+    NE_OP           reduce using rule 26 (term -> term DIV_OP factor .)
+    GE_OP           reduce using rule 26 (term -> term DIV_OP factor .)
+    GT_OP           reduce using rule 26 (term -> term DIV_OP factor .)
+    ADD_OP          reduce using rule 26 (term -> term DIV_OP factor .)
+    SUB_OP          reduce using rule 26 (term -> term DIV_OP factor .)
+    SEMICOLON       reduce using rule 26 (term -> term DIV_OP factor .)
+    RIGHT_PA        reduce using rule 26 (term -> term DIV_OP factor .)
+    THEN_KW         reduce using rule 26 (term -> term DIV_OP factor .)
+    DO_KW           reduce using rule 26 (term -> term DIV_OP factor .)
+    TO_KW           reduce using rule 26 (term -> term DIV_OP factor .)
+    COMMA           reduce using rule 26 (term -> term DIV_OP factor .)
+
+
+state 65
+
+    (29) factor -> LEFT_PA expression RIGHT_PA .
+
+    MUL_OP          reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    DIV_OP          reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    LT_OP           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    LE_OP           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    EQ_OP           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    NE_OP           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    GE_OP           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    GT_OP           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    ADD_OP          reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    SUB_OP          reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    SEMICOLON       reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    RIGHT_PA        reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    THEN_KW         reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    DO_KW           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    TO_KW           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+    COMMA           reduce using rule 29 (factor -> LEFT_PA expression RIGHT_PA .)
+
+
+state 66
+
+    (30) while_statement -> WHILE_KW condition DO_KW statement_list .
+
+    SEMICOLON       reduce using rule 30 (while_statement -> WHILE_KW condition DO_KW statement_list .)
+
+
+state 67
+
+    (31) for_statement -> FOR_KW identifier ASSIGN_OP expression . TO_KW expression DO_KW statement_list
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    TO_KW           shift and go to state 74
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 68
+
+    (34) function_call -> FUNCTION_KW identifier LEFT_PA argument_list . RIGHT_PA
+
+    RIGHT_PA        shift and go to state 75
+
+
+state 69
+
+    (35) argument_list -> expression . COMMA argument_list
+    (36) argument_list -> expression .
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    COMMA           shift and go to state 76
+    RIGHT_PA        reduce using rule 36 (argument_list -> expression .)
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 70
+
+    (37) argument_list -> empty .
+
+    RIGHT_PA        reduce using rule 37 (argument_list -> empty .)
+
+
+state 71
+
+    (12) if_statement -> IF_KW condition THEN_KW statement_list else_part .
+
+    SEMICOLON       reduce using rule 12 (if_statement -> IF_KW condition THEN_KW statement_list else_part .)
+
+
+state 72
+
+    (13) else_part -> ELSE_KW . statement_list
+    (4) statement_list -> . statement SEMICOLON statement_list
+    (5) statement_list -> . empty
+    (6) statement -> . assignment_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) statement -> . other_statements
+    (38) empty -> .
+    (11) assignment_statement -> . identifier ASSIGN_OP expression
+    (12) if_statement -> . IF_KW condition THEN_KW statement_list else_part
+    (30) while_statement -> . WHILE_KW condition DO_KW statement_list
+    (31) for_statement -> . FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (32) other_statements -> . RETURN_KW expression
+    (33) other_statements -> . function_call
+    (2) identifier -> . IDENTIFIER
+    (34) function_call -> . FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+
+    SEMICOLON       reduce using rule 38 (empty -> .)
+    IF_KW           shift and go to state 17
+    WHILE_KW        shift and go to state 18
+    FOR_KW          shift and go to state 19
+    RETURN_KW       shift and go to state 20
+    IDENTIFIER      shift and go to state 4
+    FUNCTION_KW     shift and go to state 22
+
+    statement_list                 shift and go to state 77
+    statement                      shift and go to state 9
+    empty                          shift and go to state 10
+    assignment_statement           shift and go to state 11
+    if_statement                   shift and go to state 12
+    while_statement                shift and go to state 13
+    for_statement                  shift and go to state 14
+    other_statements               shift and go to state 15
+    identifier                     shift and go to state 16
+    function_call                  shift and go to state 21
+
+state 73
+
+    (14) else_part -> empty .
+
+    SEMICOLON       reduce using rule 14 (else_part -> empty .)
+
+
+state 74
+
+    (31) for_statement -> FOR_KW identifier ASSIGN_OP expression TO_KW . expression DO_KW statement_list
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    identifier                     shift and go to state 31
+    expression                     shift and go to state 78
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+
+state 75
+
+    (34) function_call -> FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA .
+
+    SEMICOLON       reduce using rule 34 (function_call -> FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA .)
+
+
+state 76
+
+    (35) argument_list -> expression COMMA . argument_list
+    (35) argument_list -> . expression COMMA argument_list
+    (36) argument_list -> . expression
+    (37) argument_list -> . empty
+    (21) expression -> . term
+    (22) expression -> . expression ADD_OP term
+    (23) expression -> . expression SUB_OP term
+    (38) empty -> .
+    (24) term -> . factor
+    (25) term -> . term MUL_OP factor
+    (26) term -> . term DIV_OP factor
+    (27) factor -> . NUMBER
+    (28) factor -> . identifier
+    (29) factor -> . LEFT_PA expression RIGHT_PA
+    (2) identifier -> . IDENTIFIER
+
+    RIGHT_PA        reduce using rule 38 (empty -> .)
+    NUMBER          shift and go to state 30
+    LEFT_PA         shift and go to state 32
+    IDENTIFIER      shift and go to state 4
+
+    expression                     shift and go to state 69
+    argument_list                  shift and go to state 79
+    empty                          shift and go to state 70
+    term                           shift and go to state 28
+    factor                         shift and go to state 29
+    identifier                     shift and go to state 31
+
+state 77
+
+    (13) else_part -> ELSE_KW statement_list .
+
+    SEMICOLON       reduce using rule 13 (else_part -> ELSE_KW statement_list .)
+
+
+state 78
+
+    (31) for_statement -> FOR_KW identifier ASSIGN_OP expression TO_KW expression . DO_KW statement_list
+    (22) expression -> expression . ADD_OP term
+    (23) expression -> expression . SUB_OP term
+
+    DO_KW           shift and go to state 80
+    ADD_OP          shift and go to state 46
+    SUB_OP          shift and go to state 47
+
+
+state 79
+
+    (35) argument_list -> expression COMMA argument_list .
+
+    RIGHT_PA        reduce using rule 35 (argument_list -> expression COMMA argument_list .)
+
+
+state 80
+
+    (31) for_statement -> FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW . statement_list
+    (4) statement_list -> . statement SEMICOLON statement_list
+    (5) statement_list -> . empty
+    (6) statement -> . assignment_statement
+    (7) statement -> . if_statement
+    (8) statement -> . while_statement
+    (9) statement -> . for_statement
+    (10) statement -> . other_statements
+    (38) empty -> .
+    (11) assignment_statement -> . identifier ASSIGN_OP expression
+    (12) if_statement -> . IF_KW condition THEN_KW statement_list else_part
+    (30) while_statement -> . WHILE_KW condition DO_KW statement_list
+    (31) for_statement -> . FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list
+    (32) other_statements -> . RETURN_KW expression
+    (33) other_statements -> . function_call
+    (2) identifier -> . IDENTIFIER
+    (34) function_call -> . FUNCTION_KW identifier LEFT_PA argument_list RIGHT_PA
+
+    SEMICOLON       reduce using rule 38 (empty -> .)
+    IF_KW           shift and go to state 17
+    WHILE_KW        shift and go to state 18
+    FOR_KW          shift and go to state 19
+    RETURN_KW       shift and go to state 20
+    IDENTIFIER      shift and go to state 4
+    FUNCTION_KW     shift and go to state 22
+
+    identifier                     shift and go to state 16
+    statement_list                 shift and go to state 81
+    statement                      shift and go to state 9
+    empty                          shift and go to state 10
+    assignment_statement           shift and go to state 11
+    if_statement                   shift and go to state 12
+    while_statement                shift and go to state 13
+    for_statement                  shift and go to state 14
+    other_statements               shift and go to state 15
+    function_call                  shift and go to state 21
+
+state 81
+
+    (31) for_statement -> FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list .
+
+    SEMICOLON       reduce using rule 31 (for_statement -> FOR_KW identifier ASSIGN_OP expression TO_KW expression DO_KW statement_list .)
+
